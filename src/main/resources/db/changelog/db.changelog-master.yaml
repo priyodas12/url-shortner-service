@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: priyobrato.das
+      changes:
+        - createTable:
+            tableName: url_map_data
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_url_map_data
+              - column:
+                  name: source_url
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: short_url_hash
+                  type: VARCHAR(16)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_by
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visit_count
+                  type: BIGINT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expire_at
+                  type: TIMESTAMPTZ
+                  remarks: "Auto-expires 1 hour after created_at"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_accessed_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 2
+      author: priyobrato.das
+      changes:
+        - createIndex:
+            indexName: idx_short_url_hash
+            tableName: url_map_data
+            columns:
+              - column:
+                  name: short_url_hash
+
+        - createIndex:
+            indexName: idx_expire_at
+            tableName: url_map_data
+            columns:
+              - column:
+                  name: expire_at

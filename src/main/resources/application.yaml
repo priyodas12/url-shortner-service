@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: url-shortner-service
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
