@@ -14,11 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("/api/url-shortner")
 @RestController
 public class UrlShortnerController {
 
@@ -31,7 +29,8 @@ public class UrlShortnerController {
         this.urlMapDataService = urlMapDataService;
     }
 
-    @GetMapping
+
+    @GetMapping("/search")
     public ResponseEntity<ShortUrlSearchResponse> searchShortUrl(@RequestBody ShortUrlSearchRequest request) {
         log.info("searchShortUrl | {}", request);
         try {
@@ -53,7 +52,7 @@ public class UrlShortnerController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<UrlShortnerResponse> generateShortUrl(@RequestBody UrlShortnerRequest request) {
         log.info("saveShortUrl | {}", request);
         try {
