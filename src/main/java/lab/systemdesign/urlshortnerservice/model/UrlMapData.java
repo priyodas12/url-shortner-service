@@ -13,7 +13,8 @@ import java.sql.Timestamp;
 public class UrlMapData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "url_seq")
+    @SequenceGenerator(name = "url_seq", sequenceName = "url_map_data_id_seq", allocationSize = 1)
     private BigInteger id;
 
     @Column(name = "source_url")
@@ -23,7 +24,7 @@ public class UrlMapData {
     private String shortUrlHash;
 
     @Column(name = "created_by")
-    private Modifier lastAccessedBy;
+    private String lastAccessedBy;
 
     @Column(name = "visit_count")
     private BigInteger visitCount;

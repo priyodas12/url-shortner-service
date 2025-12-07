@@ -75,3 +75,11 @@ databaseChangeLog:
             columns:
               - column:
                   name: expire_at
+  - changeSet:
+      id: 3
+      author: priyobrato.das
+      changes:
+        - addUniqueConstraint:
+            tableName: url_map_data
+            columnNames: source_url
+            constraintName: uq_source_url
